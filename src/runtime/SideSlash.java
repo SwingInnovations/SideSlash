@@ -16,6 +16,7 @@ public class SideSlash extends StateBasedGame{
     @Override
     public void initStatesList(GameContainer gc) throws SlickException{
         //Add Levels here
+
     }
 
     public static void main(String[] args){

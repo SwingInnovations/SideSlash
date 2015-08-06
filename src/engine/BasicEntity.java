@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.Color;
 
 public class BasicEntity implements Entity{
     private Vector2f m_Pos;
@@ -20,6 +21,7 @@ public class BasicEntity implements Entity{
     private int m_Row;
     private int m_currentFrame;
     private int m_totalFrameCount;
+    private Color m_Color;
 
     public BasicEntity(){
         m_Pos = new Vector2f(0, 0);
@@ -63,6 +65,8 @@ public class BasicEntity implements Entity{
         m_Dim.y = _h;
     }
 
+    public void setColor(Color col){ m_Color = col; }
+
     public Vector2f getDimension(){ return m_Dim; }
 
     public void setRow(int row){
@@ -93,6 +97,8 @@ public class BasicEntity implements Entity{
         return (Shape)m_bounds;
     }
 
+    public Color getColor(){ return m_Color; }
+
     public boolean intersects(Entity other){
         return m_bounds.intersects(other.getBounds());
     }
@@ -103,7 +109,6 @@ public class BasicEntity implements Entity{
             m_timeSinceLastChange = m_time;
             nextFrame();
         }
-
     }
 
     public void nextFrame(){
@@ -116,6 +121,7 @@ public class BasicEntity implements Entity{
 
     public void draw(Graphics g){
         if(is_debugMode()){
+            g.setColor(m_Color);
             g.draw(m_bounds);
         }
         if(m_masterImage != null) g.drawImage(m_masterImage, m_Pos.getX(), m_Pos.getY());

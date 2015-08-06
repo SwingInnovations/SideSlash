@@ -10,10 +10,11 @@ public interface Entity {
     void setPosX(float _x);
     void setPosY(float _y);
 
+    //Dimmensions
     void setDimension(Vector2f dim);
     void setWidth(float _w);
     void setHeight(float _h);
-
+    //Boundary checking
     Shape getBounds();
     boolean intersects(Entity other);
 

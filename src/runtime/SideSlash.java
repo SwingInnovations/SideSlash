@@ -1,5 +1,6 @@
 package runtime;
 
+import levels.DemoLevel;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.AppGameContainer;
@@ -8,15 +9,18 @@ import org.newdawn.slick.SlickException;
 public class SideSlash extends StateBasedGame{
 
     private static final String GAME_NAME = "Side Slash";
+    public static final int DEMO_LEVEL = 0;
 
     public SideSlash(String name){
         super(name);
+        addState(new DemoLevel(DEMO_LEVEL));
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException{
-        //Add Levels here
-
+        //initialize levels here
+        getState(DEMO_LEVEL).init(gc, this);
+        enterState(DEMO_LEVEL);
     }
 
     public static void main(String[] args){

@@ -18,8 +18,8 @@ public class DemoLevel extends BasicGameState{
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
-        m_testPlayer = new PlayerEntity(new Vector2f(20, 620), new Vector2f(32, 64));
-        m_testPlayer.initFoot(new Vector2f(32, 10));
+        m_testPlayer = new PlayerEntity(new Vector2f(20, 500), new Vector2f(64, 96));
+        m_testPlayer.initFoot(new Vector2f(64, 10));
         m_testPlayer.setDebugMode(true);
         m_testPlayer.setColor(Color.yellow);
     }

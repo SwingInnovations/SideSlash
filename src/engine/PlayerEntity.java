@@ -17,6 +17,7 @@ public class PlayerEntity extends MoveableEntity{
     private int PLAYER_SHIFT_DOWN = -1;
     private int PLAYER_SHIFT_UP = -1;
     private final float X_SPEED = 0.25f;
+    private boolean m_isOnGround;
 
     public PlayerEntity(){
         super();
@@ -24,8 +25,8 @@ public class PlayerEntity extends MoveableEntity{
 
     public PlayerEntity(Vector2f pos, Vector2f dim){
         super(pos, dim);
-        setPLAYER_LEFT(Input.KEY_D);
-        setPLAYER_RIGHT(Input.KEY_A);
+        setPLAYER_LEFT(Input.KEY_A);
+        setPLAYER_RIGHT(Input.KEY_D);
         setPLAYER_SHIFT_DOWN(Input.KEY_S);
         setPLAYER_SHIFT_UP(Input.KEY_W);
         setPLAYER_BLOCK(Input.KEY_Q);
@@ -36,10 +37,19 @@ public class PlayerEntity extends MoveableEntity{
         setPLAYER_WEAPON_2(Input.KEY_2);
     }
 
+    private void jump(int delta){
+        if(m_isOnGround){
+
+        }else{
+
+        }
+    }
+
     public void update(GameContainer gc, int delta){
         Input input = gc.getInput();
         if(input.isKeyPressed(PLAYER_JUMP)){
             //jump
+
         }else if(input.isKeyPressed(PLAYER_FIRE)){
             //fire
         }else if(input.isKeyPressed(PLAYER_WEAPON_CYCLE)){
@@ -58,11 +68,15 @@ public class PlayerEntity extends MoveableEntity{
         if(input.isKeyDown(PLAYER_LEFT)){
             //Move Left
             float _x = super.getPosition().getX();
-            _x -= X_SPEED * delta;
+            if(_x < 0){
+                _x = 0;
+            }else {
+                _x -= X_SPEED * (float) delta;
+            }
             super.setPosX(_x);
         }else if(input.isKeyDown(PLAYER_RIGHT)){
             float _x = super.getPosition().getX();
-            _x += X_SPEED * delta;
+            _x += X_SPEED * (float)delta;
             super.setPosX(_x);
             //Move Right
         }else if(input.isKeyDown(PLAYER_BLOCK)){

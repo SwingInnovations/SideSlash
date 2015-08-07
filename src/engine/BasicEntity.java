@@ -44,10 +44,12 @@ public class BasicEntity implements Entity{
     @Override
     public void setPosX(float _x){
         m_Pos.x = _x;
+        m_bounds.setX(_x);
     }
 
     public void setPosY(float _y){
         m_Pos.y = _y;
+        m_bounds.setY(_y);
     }
 
     public Vector2f getPosition(){ return m_Pos; }

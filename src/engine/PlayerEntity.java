@@ -16,6 +16,7 @@ public class PlayerEntity extends MoveableEntity{
     private int PLAYER_FIRE = -1;
     private int PLAYER_SHIFT_DOWN = -1;
     private int PLAYER_SHIFT_UP = -1;
+    private final float X_SPEED = 0.25f;
 
     public PlayerEntity(){
         super();
@@ -50,16 +51,22 @@ public class PlayerEntity extends MoveableEntity{
         }else if(input.isKeyPressed(PLAYER_SHIFT_DOWN)){
             //Shift down
             decreaseLane();
-        }else if(input.isKeyPressed(PLAYER_SHIFT_UP)){
+        }else if(input.isKeyPressed(PLAYER_SHIFT_UP)) {
             //Shift up
             increaseLane();
         }
-
         if(input.isKeyDown(PLAYER_LEFT)){
             //Move Left
+            float _x = super.getPosition().getX();
+            _x -= X_SPEED * delta;
+            super.setPosX(_x);
         }else if(input.isKeyDown(PLAYER_RIGHT)){
+            float _x = super.getPosition().getX();
+            _x += X_SPEED * delta;
+            super.setPosX(_x);
             //Move Right
         }else if(input.isKeyDown(PLAYER_BLOCK)){
+
             //Block
         }
     }

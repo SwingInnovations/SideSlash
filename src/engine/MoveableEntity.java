@@ -1,6 +1,9 @@
 package engine;
 
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
+
+import java.util.Vector;
 
 public class MoveableEntity extends BasicEntity{
     public static int LEFT = 0;
@@ -9,6 +12,7 @@ public class MoveableEntity extends BasicEntity{
     private int m_lane;
     private int m_direction;
     private int m_health;
+    private Rectangle m_Foot;
 
     public MoveableEntity(){
         super();
@@ -16,6 +20,11 @@ public class MoveableEntity extends BasicEntity{
 
     public MoveableEntity(Vector2f pos, Vector2f dim){
         super(pos, dim);
+    }
+
+    public void initFoot(Vector2f dim){
+        Vector2f pos = new Vector2f(super.getPosition().x, super.getPosition().getY() - dim.y);
+        m_Foot = new Rectangle(pos.x, pos.y, dim.x, dim.y);
     }
 
     public void setDirection(int dir){
@@ -62,5 +71,9 @@ public class MoveableEntity extends BasicEntity{
 
     public int getHealth() {
         return m_health;
+    }
+
+    public Rectangle getFootBounds(){
+        return m_Foot;
     }
 }

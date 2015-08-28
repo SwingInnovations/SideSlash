@@ -17,6 +17,8 @@ public class PlayerEntity extends MoveableEntity{
     private int PLAYER_SHIFT_DOWN = -1;
     private int PLAYER_SHIFT_UP = -1;
     private final float X_SPEED = 0.25f;
+    private final float X_MAX_SPEED = 0.75f;
+    private float x_Vel = X_SPEED;
     private boolean m_isOnGround;
 
     public PlayerEntity(){
@@ -71,17 +73,25 @@ public class PlayerEntity extends MoveableEntity{
             if(_x < 0){
                 _x = 0;
             }else {
-                _x -= X_SPEED * (float) delta;
+                if(x_Vel > X_MAX_SPEED){
+                    x_Vel = X_MAX_SPEED;
+                }
+                _x -= x_Vel* (float) delta;
+                x_Vel += (0.00098) * delta;
             }
             super.setPosX(_x);
         }else if(input.isKeyDown(PLAYER_RIGHT)){
             float _x = super.getPosition().getX();
-            _x += X_SPEED * (float)delta;
+            if(x_Vel > X_MAX_SPEED) x_Vel = X_MAX_SPEED;
+            _x += x_Vel * (float)delta;
+            x_Vel += (0.00098) * delta;
             super.setPosX(_x);
             //Move Right
         }else if(input.isKeyDown(PLAYER_BLOCK)){
 
             //Block
+        }else{
+            x_Vel = 0.0f;
         }
     }
 

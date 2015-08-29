@@ -17,8 +17,11 @@ public class PlayerEntity extends MoveableEntity{
     private int PLAYER_SHIFT_DOWN = -1;
     private int PLAYER_SHIFT_UP = -1;
     private final float X_SPEED = 0.25f;
+    private final float Y_SPEED = 0.25f;
     private final float X_MAX_SPEED = 0.75f;
+    private final float Y_MAX_SPEED = 0.75f;
     private float x_Vel = X_SPEED;
+    private float y_Vel = Y_SPEED;
     private boolean m_isOnGround;
 
     public PlayerEntity(){
@@ -62,11 +65,12 @@ public class PlayerEntity extends MoveableEntity{
             //GOTO weapon 2
         }else if(input.isKeyPressed(PLAYER_SHIFT_DOWN)){
             //Shift down
+
             decreaseLane();
         }else if(input.isKeyPressed(PLAYER_SHIFT_UP)) {
-            //Shift up
             increaseLane();
         }
+
         if(input.isKeyDown(PLAYER_LEFT)){
             //Move Left
             float _x = super.getPosition().getX();
@@ -92,6 +96,23 @@ public class PlayerEntity extends MoveableEntity{
             //Block
         }else{
             x_Vel = 0.0f;
+        }
+        if(isLaneChanging()){
+            float _y = super.getPosition().getY();
+            int target = getLaneDist(getLane());
+            if((int)_y == target){
+                setLanesChanging(false);
+
+            }
+            if(getDirType() == v_DirType.DOWN){
+                _y -= y_Vel * (float)delta;
+            }else if( getDirType() == v_DirType.UP){
+                _y += y_Vel * (float)delta;
+            }
+            y_Vel += (0.000098f) * (float)delta;
+            super.setPosY(_y);
+        }else{
+            y_Vel = 0.0f;
         }
     }
 
